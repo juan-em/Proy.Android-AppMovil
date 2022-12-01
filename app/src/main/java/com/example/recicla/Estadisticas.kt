@@ -75,29 +75,19 @@ class Estadisticas : AppCompatActivity() {
     fun cargar() {
         AsyncTask.execute {
             val queue = Volley.newRequestQueue(applicationContext)
-            val plastico = "rplastico"
-            val vidrio = "rvidrio"
-            val papel = "rpapel"
-            val urlPlastico = getString(com.example.recicla.R.string.urlAPI) + "/api/" + plastico
+            val urlPlastico = getString(com.example.recicla.R.string.urlAPI) + "/api/rplastico/6"
             val stringRequestPlastico = JsonArrayRequest(urlPlastico,
                 { response ->
                     try {
-                        var id=0
-                        var user_id=0
-                        var porcentaje=0
+                        var total_count=0
                         var reg_date=""
-
                         for (i in 0 until response.length()) {
-                            id =
-                                response.getJSONObject(i).getInt("id")
-                            user_id =
-                                response.getJSONObject(i).getInt("user_id")
-                            porcentaje =
-                                response.getJSONObject(i).getInt("porcentaje")
+                            total_count =
+                                response.getJSONObject(i).getInt("total_count")
                             reg_date =
                                 response.getJSONObject(i).getString("reg_date").substring(0,10)
 
-                            agregarPlastico(reg_date, porcentaje)
+                            agregarPlastico(reg_date, total_count)
                         }
 
                     } catch (e: JSONException) {
@@ -117,27 +107,17 @@ class Estadisticas : AppCompatActivity() {
             queue.add(stringRequestPlastico)
 
             //
-            val urlVidrio = getString(com.example.recicla.R.string.urlAPI) + "/api/" + vidrio
+            val urlVidrio = getString(com.example.recicla.R.string.urlAPI) + "/api/rvidrio/6"
             val stringRequestVidrio = JsonArrayRequest(urlVidrio,
                 { response ->
                     try {
-                        var id=0
-                        var user_id=0
-                        var porcentaje=0
-                        var reg_date=""
-
+                        var total_count=0
                         for (i in 0 until response.length()) {
-                            id =
-                                response.getJSONObject(i).getInt("id")
-                            user_id =
-                                response.getJSONObject(i).getInt("user_id")
-                            porcentaje =
-                                response.getJSONObject(i).getInt("porcentaje")
-                            reg_date =
-                                response.getJSONObject(i).getString("reg_date").substring(0,10)
-
-                            agregarVidrio(porcentaje)
+                            total_count =
+                                response.getJSONObject(i).getInt("total_count")
+                            agregarVidrio(total_count)
                         }
+
 
                     } catch (e: JSONException) {
                         Toast.makeText(
@@ -156,26 +136,15 @@ class Estadisticas : AppCompatActivity() {
             queue.add(stringRequestVidrio)
 
             //
-            val urlPapel = getString(com.example.recicla.R.string.urlAPI) + "/api/" + papel
+            val urlPapel = getString(com.example.recicla.R.string.urlAPI) + "/api/rpapel/6"
             val stringRequestPapel = JsonArrayRequest(urlPapel,
                 { response ->
                     try {
-                        var id=0
-                        var user_id=0
-                        var porcentaje=0
-                        var reg_date=""
-
+                        var total_count=0
                         for (i in 0 until response.length()) {
-                            id =
-                                response.getJSONObject(i).getInt("id")
-                            user_id =
-                                response.getJSONObject(i).getInt("user_id")
-                            porcentaje =
-                                response.getJSONObject(i).getInt("porcentaje")
-                            reg_date =
-                                response.getJSONObject(i).getString("reg_date").substring(0,10)
-
-                            agregarPapel(porcentaje)
+                            total_count =
+                                response.getJSONObject(i).getInt("total_count")
+                            agregarPapel(total_count)
                         }
 
                     } catch (e: JSONException) {

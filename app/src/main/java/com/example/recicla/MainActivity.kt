@@ -83,6 +83,4 @@ class MainActivity : AppCompatActivity() {
             queue.add(postRequest)
         }
     }
-
-
 }
